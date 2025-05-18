@@ -1,6 +1,6 @@
 [package]
 name = "krunner-rink"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2024"
 authors = ["Dominique Hummel <naxdy@naxdy.org>"]
 repository = "https://github.com/Naxdy/krunner-rink"
