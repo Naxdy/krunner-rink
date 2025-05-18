@@ -68,6 +68,7 @@
 
               buildInputs = [
                 pkgs.dbus
+                pkgs.openssl
               ];
 
               # can add `nativeBuildInputs` or `buildInputs` here
