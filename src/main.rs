@@ -22,15 +22,20 @@ impl krunner::Runner for Runner {
             return Ok(vec![]);
         };
 
-        let value = rink_res
+        let (value, desc) = rink_res
             .split_once(" (")
-            .map(|(title, _)| title.to_string())
-            .unwrap_or(rink_res.clone());
+            .map(|(title, desc)| {
+                (
+                    title.to_string(),
+                    Some(desc.trim_end_matches(')').to_string()),
+                )
+            })
+            .unwrap_or((rink_res.clone(), None));
 
         let m = Match {
             id: value.clone(),
-            title: "Rink".to_string(),
-            subtitle: Some(rink_res.clone()),
+            title: value.clone(),
+            subtitle: desc,
             icon: "accessories-calculator".to_string().into(),
             ty: krunner::MatchType::ExactMatch,
             relevance: 1.,
