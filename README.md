@@ -31,3 +31,43 @@ per day, and use the US average electricity cost.
 <p align="center">
     <img src="https://github.com/Naxdy/krunner-rink/blob/main/assets/pc_cost.png?raw=true" alt="electricity cost" />
 </p>
+
+## Installation
+
+A `flake.nix` for installation using the [Nix](https://nixos.org) package manager is provided. You can install `krunner-rink` using the following methods:
+
+### Imperatively (nix profile)
+
+```shell
+nix profile install github:Naxdy/krunner-rink
+```
+
+### Declaratively (flakes)
+
+Simply add this flake to your `inputs`, then either add its overlay to your `nixpkgs.overlays`, or directly add `krunner-rink.packages.${system}.default`
+to your `systemPackages`, or your user's packages.
+
+```nix
+{
+    inputs.krunner-rink.url = "github:Naxdy/krunner-rink";
+
+    inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    outputs = { self, krunner-rink }: {
+        nixosConfigurations.default = { pkgs, ... }: {
+            nixpkgs.overlays = [
+                krunner-rink.overlays.default
+            ];
+
+            environment.systemPackages = [
+                pkgs.krunner-rink
+            ];
+        };
+    };
+}
+```
+
+### Installation without Nix
+
+Since I only use NixOS, that's what I've packaged `krunner-rink` for. If you or someone else package `krunner-rink` for a different distro, feel free
+to let me know, and I will link your package in this Readme.
