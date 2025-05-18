@@ -141,6 +141,10 @@
         }
       );
 
+      overlays.default = final: prev: {
+        krunner-rink = self.packages.${final.system}.default;
+      };
+
       formatter = forEachSupportedSystem ({ treefmt, ... }: treefmt);
 
       packages = forEachSupportedSystem (
